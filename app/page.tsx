@@ -4,6 +4,7 @@ import { SearchBar } from "@/components/search-bar"
 import { MovieGridSkeleton } from "@/components/movie-grid-skeleton"
 import { ErrorBoundary } from "@/components/error-boundary"
 import { Header } from "@/components/header";
+import { Footer } from "@/components/footer"
 
 export default function HomePage() {
   return (
@@ -36,6 +37,7 @@ export default function HomePage() {
             </ErrorBoundary>
           </section>
         </div>
+      <Footer />
       </main>
     </>
   )

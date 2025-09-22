@@ -21,7 +21,7 @@ export function AuthModal({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
     <Dialog open={isOpen} onOpenChange={onClose}>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle className="text-foreground">Sign In to MovieFinder</DialogTitle>
+          <DialogTitle className="text-foreground">Sign In to PataMovie</DialogTitle>
         </DialogHeader>
         <div className="grid gap-6">
           <Button
