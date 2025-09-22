@@ -5,7 +5,7 @@ import { Suspense } from "react"
 import { ErrorBoundary } from "@/components/error-boundary"
 import { LoadingSpinner } from "@/components/loading-spinner"
 import "./globals.css"
-import ClientProviders from "./ClientProviders"
+import ClientProviders from "./client-provider"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
