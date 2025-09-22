@@ -17,13 +17,13 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 export const metadata: Metadata = {
-  title: "MovieFinder - Discover Amazing Movies",
+  title: "PataMovie - Discover Amazing Movies",
   description:
     "Find your next favorite film from thousands of movies. Browse popular, top-rated, and search for any movie with detailed cast, crew, and rating information.",
   keywords: ["movies", "films", "cinema", "entertainment", "TMDB", "movie database", "movie search"],
-  authors: [{ name: "MovieFinder Team" }],
-  creator: "MovieFinder",
-  publisher: "MovieFinder",
+  authors: [{ name: "PataMovie Team" }],
+  creator: "PataMovie",
+  publisher: "PataMovie",
   formatDetection: {
     email: false,
     address: false,
@@ -34,17 +34,17 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://your-movie-app.vercel.app",
-    title: "MovieFinder - Discover Amazing Movies",
+    title: "PataMovie - Discover Amazing Movies",
     description:
       "Find your next favorite film from thousands of movies. Browse popular, top-rated, and search for any movie.",
-    siteName: "MovieFinder",
+    siteName: "PataMovie",
   },
   twitter: {
     card: "summary_large_image",
-    title: "MovieFinder - Discover Amazing Movies",
+    title: "PataMovie - Discover Amazing Movies",
     description:
       "Find your next favorite film from thousands of movies. Browse popular, top-rated, and search for any movie.",
-    creator: "@moviefinder",
+    creator: "@PataMovie",
   },
   robots: {
     index: true,
