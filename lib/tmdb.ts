@@ -83,7 +83,7 @@ class TMDBService {
   private baseURL = "https://api.themoviedb.org/3"
   private imageBaseURL = "https://image.tmdb.org/t/p"
   private apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY
-  private cache = new Map<string, { data: any; timestamp: number }>()
+  private cache = new Map<string, { data: unknown; timestamp: number }>()
   private cacheTimeout = 5 * 60 * 1000 
 
   constructor() {
@@ -102,46 +102,46 @@ class TMDBService {
   }
 
   private async fetchFromAPI<T>(endpoint: string, params?: Record<string, string>): Promise<T> {
-    const cacheKey = this.getCacheKey(endpoint, params)
+    const cacheKey = this.getCacheKey(endpoint, params);
 
     // Check cache first
-    const cached = this.cache.get(cacheKey)
+    const cached = this.cache.get(cacheKey);
     if (cached && this.isValidCache(cached.timestamp)) {
-      return cached.data
+      return cached.data as T; 
     }
 
     if (!this.apiKey) {
-      throw new Error("TMDB API key is required")
+      throw new Error("TMDB API key is required");
     }
 
-    const url = new URL(`${this.baseURL}${endpoint}`)
-    url.searchParams.append("api_key", this.apiKey)
+    const url = new URL(`${this.baseURL}${endpoint}`);
+    url.searchParams.append("api_key", this.apiKey);
 
     if (params) {
       Object.entries(params).forEach(([key, value]) => {
-        url.searchParams.append(key, value)
-      })
+        url.searchParams.append(key, value);
+      });
     }
 
     try {
-      const response = await fetch(url.toString())
+      const response = await fetch(url.toString());
 
       if (!response.ok) {
-        throw new Error(`TMDB API error: ${response.status} ${response.statusText}`)
+        throw new Error(`TMDB API error: ${response.status} ${response.statusText}`);
       }
 
-      const data = await response.json()
+      const data: T = await response.json();
 
       // Cache the result
       this.cache.set(cacheKey, {
         data,
         timestamp: Date.now(),
-      })
+      });
 
-      return data
+      return data;
     } catch (error) {
-      console.error("TMDB API fetch error:", error)
-      throw error
+      console.error("TMDB API fetch error:", error);
+      throw error;
     }
   }
 
