@@ -6,13 +6,12 @@ import { Footer } from "@/components/footer"
 import { ErrorBoundary } from "@/components/error-boundary"
 
 interface MoviePageProps {
-  params: {
-    id: string
-  }
+  params: Promise<{ id: string }>
 }
 
-export default function MoviePage({ params }: MoviePageProps) {
-  const movieId = Number.parseInt(params.id)
+export default async function MoviePage({ params }: MoviePageProps) {
+  const resolvedParams = await params
+  const movieId = Number.parseInt(resolvedParams.id)
 
   if (isNaN(movieId)) {
     return (
