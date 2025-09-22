@@ -30,7 +30,6 @@ interface MovieDetailsProps {
 export function MovieDetails({ movieId }: MovieDetailsProps) {
   const { data: movie, loading, error } = useMovieDetails(movieId)
   const { user } = useAuth()
-  const [imageError, setImageError] = useState(false)
   const [isFavorited, setIsFavorited] = useState(false)
   const [isBookmarked, setIsBookmarked] = useState(false)
 
@@ -81,6 +80,8 @@ export function MovieDetails({ movieId }: MovieDetailsProps) {
             alt={movie.title}
             className="w-full h-full object-cover"
             fallback="/movie-backdrop.png"
+            width={1280}
+            height={720}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
@@ -99,9 +100,11 @@ export function MovieDetails({ movieId }: MovieDetailsProps) {
           <div className="sticky top-8 space-y-6">
             <div className="relative aspect-[2/3] overflow-hidden rounded-lg shadow-lg">
               <LazyImage
-                src={imageError ? "/abstract-movie-poster.png" : posterUrl}
+                src={posterUrl}
                 alt={movie.title}
                 className="w-full h-full object-cover"
+                width={500}
+                height={750}
               />
             </div>
 
@@ -233,6 +236,8 @@ export function MovieDetails({ movieId }: MovieDetailsProps) {
                           alt={actor.name}
                           className="w-full h-full object-cover"
                           fallback="/diverse-person-profiles.png"
+                          width={185}
+                          height={278}
                         />
                       </div>
                       <h4 className="font-medium text-sm text-foreground truncate">{actor.name}</h4>

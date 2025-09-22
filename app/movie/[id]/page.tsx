@@ -1,11 +1,9 @@
 import { Suspense } from "react"
-import type { Metadata } from "next"
 import { MovieDetails } from "@/components/movie-details"
 import { MovieDetailsSkeleton } from "@/components/movie-details-skeleton"
 import { BackButton } from "@/components/back-button"
 import { Footer } from "@/components/footer"
 import { ErrorBoundary } from "@/components/error-boundary"
-import { tmdbService } from "@/lib/tmdb"
 
 interface MoviePageProps {
   params: {

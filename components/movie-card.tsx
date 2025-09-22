@@ -46,6 +46,8 @@ export function MovieCard({ movie, onClick, className, priority = false }: Movie
             className="w-full h-full transition-transform duration-300 group-hover:scale-110"
             fallback="/abstract-movie-poster.png"
             priority={priority}
+            width={342}
+            height={513}
           />
 
           {/* Rating Badge */}

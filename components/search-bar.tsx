@@ -99,6 +99,8 @@ export function SearchBar() {
                       alt={movie.title}
                       className="w-12 h-18 object-cover rounded"
                       fallback="/abstract-movie-poster.png"
+                      width={92}
+                      height={138}
                     />
                     <div className="flex-1 min-w-0">
                       <h4 className="font-medium text-foreground truncate">{movie.title}</h4>
