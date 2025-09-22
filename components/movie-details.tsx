@@ -58,20 +58,16 @@ export function MovieDetails({ movieId }: MovieDetailsProps) {
 
   const handleFavorite = () => {
     if (!user) {
-      // Show auth modal or redirect to login
       return
     }
     setIsFavorited(!isFavorited)
-    // In a real app, this would make an API call to save the favorite
   }
 
   const handleBookmark = () => {
     if (!user) {
-      // Show auth modal or redirect to login
       return
     }
     setIsBookmarked(!isBookmarked)
-    // In a real app, this would make an API call to save the bookmark
   }
 
   return (

@@ -13,37 +13,6 @@ interface MoviePageProps {
   }
 }
 
-export async function generateMetadata({ params }: MoviePageProps): Promise<Metadata> {
-  const movieId = Number.parseInt(params.id)
-
-  if (isNaN(movieId)) {
-    return {
-      title: "Movie Not Found | PataMovie",
-      description: "The requested movie could not be found.",
-    }
-  }
-
-  try {
-    const movie = await tmdbService.getMovieDetails(movieId)
-    const releaseYear = movie.release_date ? new Date(movie.release_date).getFullYear() : ""
-
-    return {
-      title: `${movie.title} ${releaseYear ? `(${releaseYear})` : ""} | PataMovie`,
-      description: movie.overview || `Discover ${movie.title} and explore cast, crew, ratings, and more.`,
-      openGraph: {
-        title: movie.title,
-        description: movie.overview || `Discover ${movie.title} and explore cast, crew, ratings, and more.`,
-        images: movie.backdrop_path ? [tmdbService.getBackdropURL(movie.backdrop_path, "w1280")] : [],
-      },
-    }
-  } catch (error) {
-    return {
-      title: "Movie Details | PataMovie",
-      description: "Explore detailed movie information including cast, crew, and ratings.",
-    }
-  }
-}
-
 export default function MoviePage({ params }: MoviePageProps) {
   const movieId = Number.parseInt(params.id)
 

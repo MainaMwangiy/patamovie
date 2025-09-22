@@ -1,21 +1,11 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Geist, Geist_Mono } from "next/font/google";
 import { Suspense } from "react"
 import { ErrorBoundary } from "@/components/error-boundary"
 import { LoadingSpinner } from "@/components/loading-spinner"
 import "./globals.css"
 import ClientProviders from "./client-provider"
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 export const metadata: Metadata = {
   title: "PataMovie - Discover Amazing Movies",
   description:
@@ -29,11 +19,11 @@ export const metadata: Metadata = {
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://your-movie-app.vercel.app"),
+  metadataBase: new URL("https://patamovie.vercel.app"),
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://your-movie-app.vercel.app",
+    url: "https://patamovie.vercel.app",
     title: "PataMovie - Discover Amazing Movies",
     description:
       "Find your next favorite film from thousands of movies. Browse popular, top-rated, and search for any movie.",
@@ -56,11 +46,7 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  verification: {
-    google: "your-google-verification-code",
-  },
-    generator: 'v0.app'
+  }
 }
 
 export default function RootLayout({
@@ -70,7 +56,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`antialiased`}>
         <ErrorBoundary>
             <Suspense
               fallback={

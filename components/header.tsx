@@ -11,6 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import Link from "next/link";
+import { Heart, LogOut, Settings, Users } from "lucide-react";
 
 export function Header() {
   const { data: session } = useSession();
@@ -51,20 +52,20 @@ export function Header() {
                 </div>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                  <span className="mr-2">👤</span>
+                  <Users />
                   <span>Profile</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <span className="mr-2">❤️</span>
+                  <Heart/>
                   <span>Favorites</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <span className="mr-2">⚙️</span>
+                  <Settings />
                   <span>Settings</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={() => signOut({ callbackUrl: "/" })}>
-                  <span className="mr-2">🚪</span>
+                  <LogOut /> 
                   <span>Log out</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>
