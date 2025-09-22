@@ -81,7 +81,7 @@ export function SearchBar() {
 
           {data && data.results.length === 0 && !loading && (
             <div className="p-4 text-center text-muted-foreground">
-              <p>No movies found for "{query}"</p>
+              <p>{`No movies found for ${query}`} </p>
             </div>
           )}
 

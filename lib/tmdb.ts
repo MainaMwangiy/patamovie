@@ -1,4 +1,3 @@
-// TMDB API service with caching and error handling
 export interface Movie {
   id: number
   title: string
@@ -85,7 +84,7 @@ class TMDBService {
   private imageBaseURL = "https://image.tmdb.org/t/p"
   private apiKey = process.env.NEXT_PUBLIC_TMDB_API_KEY
   private cache = new Map<string, { data: any; timestamp: number }>()
-  private cacheTimeout = 5 * 60 * 1000 // 5 minutes
+  private cacheTimeout = 5 * 60 * 1000 
 
   constructor() {
     if (!this.apiKey) {
@@ -213,11 +212,9 @@ class TMDBService {
     return `${this.imageBaseURL}/${size}${path}`
   }
 
-  // Clear cache (useful for testing)
   clearCache(): void {
     this.cache.clear()
   }
 }
 
-// Export singleton instance
 export const tmdbService = new TMDBService()
