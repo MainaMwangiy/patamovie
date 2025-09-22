@@ -3,11 +3,13 @@ import { MovieGrid } from "@/components/movie-grid"
 import { SearchBar } from "@/components/search-bar"
 import { MovieGridSkeleton } from "@/components/movie-grid-skeleton"
 import { ErrorBoundary } from "@/components/error-boundary"
+import { Header } from "@/components/header";
 
 export default function HomePage() {
   return (
     <>
       <main className="min-h-screen bg-background">
+         <Header />
         <div className="container mx-auto px-4 py-8">
           <header className="text-center mb-8">
             <h1 className="text-4xl md:text-6xl font-bold text-foreground mb-4 text-balance">

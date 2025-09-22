@@ -6,6 +6,7 @@ import { Suspense } from "react"
 import { ErrorBoundary } from "@/components/error-boundary"
 import { LoadingSpinner } from "@/components/loading-spinner"
 import "./globals.css"
+import ClientProviders from "./ClientProviders"
 
 export const metadata: Metadata = {
   title: "MovieFinder - Discover Amazing Movies",
@@ -70,7 +71,9 @@ export default function RootLayout({
                 </div>
               }
             >
+              <ClientProviders>
               {children}
+              </ClientProviders>
             </Suspense>
         </ErrorBoundary>
       </body>
