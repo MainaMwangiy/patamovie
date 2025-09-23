@@ -10,6 +10,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import Link from "next/link";
+import { Heart, LogOut, Settings, Users } from "lucide-react";
 
 export function Header() {
   const { data: session } = useSession();
@@ -26,10 +28,9 @@ export function Header() {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-        <a href="/" className="flex items-center gap-2 font-bold text-xl text-foreground hover:text-primary">
-          <span className="text-primary">🎥</span>
+        <Link href="/" className="flex items-center gap-2 font-bold text-xl text-foreground hover:text-primary">
           PataMovie
-        </a>
+        </Link>
         <div className="flex items-center gap-4">
           {user ? (
             <DropdownMenu>
@@ -51,20 +52,20 @@ export function Header() {
                 </div>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                  <span className="mr-2">👤</span>
+                  <Users />
                   <span>Profile</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <span className="mr-2">❤️</span>
+                  <Heart/>
                   <span>Favorites</span>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <span className="mr-2">⚙️</span>
+                  <Settings />
                   <span>Settings</span>
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={() => signOut({ callbackUrl: "/" })}>
-                  <span className="mr-2">🚪</span>
+                  <LogOut /> 
                   <span>Log out</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>

@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 import { cn } from "@/lib/utils"
+import Image from "next/image"
 
 interface LazyImageProps {
   src: string
@@ -26,6 +27,24 @@ export function LazyImage({
   const [hasError, setHasError] = useState(false)
   const [isInView, setIsInView] = useState(priority)
   const imgRef = useRef<HTMLImageElement>(null)
+
+  const getImageDimensions = () => {
+    if (width && height) {
+      return { width, height }
+    }
+
+    let defaultWidth = 342
+    let defaultHeight = Math.round(342 * 1.5) 
+    const match = src.match(/\/t\/p\/w(\d+)/)
+    if (match) {
+      defaultWidth = parseInt(match[1], 10)
+      defaultHeight = Math.round(defaultWidth * 1.5) 
+    }
+
+    return { width: defaultWidth, height: defaultHeight }
+  }
+
+  const { width: imgWidth, height: imgHeight } = getImageDimensions()
 
   useEffect(() => {
     if (priority) return
@@ -58,11 +77,13 @@ export function LazyImage({
   }
 
   return (
-    <div ref={imgRef} className={cn("relative overflow-hidden bg-muted", className)} style={{ width, height }}>
+    <div ref={imgRef} className={cn("relative overflow-hidden bg-muted", className)} style={{ width: imgWidth, height: imgHeight }}>
       {isInView && (
-        <img
+        <Image
           src={hasError ? fallback : src}
           alt={alt}
+          width={imgWidth} 
+          height={imgHeight} 
           className={cn(
             "w-full h-full object-cover transition-opacity duration-300",
             isLoaded ? "opacity-100" : "opacity-0",

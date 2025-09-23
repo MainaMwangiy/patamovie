@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, ReactNode } from "react";
-import { useSession, signIn, signOut, SignInResponse } from "next-auth/react";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 interface AuthContextType {
   user: { id: string; name?: string | null; email?: string | null; image?: string | null } | null;

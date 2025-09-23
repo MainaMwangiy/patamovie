@@ -1,51 +1,17 @@
 import { Suspense } from "react"
-import type { Metadata } from "next"
 import { MovieDetails } from "@/components/movie-details"
 import { MovieDetailsSkeleton } from "@/components/movie-details-skeleton"
 import { BackButton } from "@/components/back-button"
 import { Footer } from "@/components/footer"
 import { ErrorBoundary } from "@/components/error-boundary"
-import { tmdbService } from "@/lib/tmdb"
 
 interface MoviePageProps {
-  params: {
-    id: string
-  }
+  params: Promise<{ id: string }>
 }
 
-export async function generateMetadata({ params }: MoviePageProps): Promise<Metadata> {
-  const movieId = Number.parseInt(params.id)
-
-  if (isNaN(movieId)) {
-    return {
-      title: "Movie Not Found | PataMovie",
-      description: "The requested movie could not be found.",
-    }
-  }
-
-  try {
-    const movie = await tmdbService.getMovieDetails(movieId)
-    const releaseYear = movie.release_date ? new Date(movie.release_date).getFullYear() : ""
-
-    return {
-      title: `${movie.title} ${releaseYear ? `(${releaseYear})` : ""} | PataMovie`,
-      description: movie.overview || `Discover ${movie.title} and explore cast, crew, ratings, and more.`,
-      openGraph: {
-        title: movie.title,
-        description: movie.overview || `Discover ${movie.title} and explore cast, crew, ratings, and more.`,
-        images: movie.backdrop_path ? [tmdbService.getBackdropURL(movie.backdrop_path, "w1280")] : [],
-      },
-    }
-  } catch (error) {
-    return {
-      title: "Movie Details | PataMovie",
-      description: "Explore detailed movie information including cast, crew, and ratings.",
-    }
-  }
-}
-
-export default function MoviePage({ params }: MoviePageProps) {
-  const movieId = Number.parseInt(params.id)
+export default async function MoviePage({ params }: MoviePageProps) {
+  const resolvedParams = await params
+  const movieId = Number.parseInt(resolvedParams.id)
 
   if (isNaN(movieId)) {
     return (

@@ -6,6 +6,7 @@ import { Search, X } from "lucide-react"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useMovieSearch } from "@/hooks/use-movies"
+import { LazyImage } from "./performance/lazy-image"
 
 export function SearchBar() {
   const [query, setQuery] = useState("")
@@ -80,7 +81,7 @@ export function SearchBar() {
 
           {data && data.results.length === 0 && !loading && (
             <div className="p-4 text-center text-muted-foreground">
-              <p>No movies found for "{query}"</p>
+              <p>{`No movies found for ${query}`} </p>
             </div>
           )}
 
@@ -93,13 +94,13 @@ export function SearchBar() {
                     className="flex gap-3 p-2 rounded-lg hover:bg-muted cursor-pointer transition-colors"
                     onClick={() => handleMovieClick(movie.id)}
                   >
-                    <img
+                    <LazyImage
                       src={`https://image.tmdb.org/t/p/w92${movie.poster_path}`}
                       alt={movie.title}
                       className="w-12 h-18 object-cover rounded"
-                      onError={(e) => {
-                        e.currentTarget.src = "/abstract-movie-poster.png"
-                      }}
+                      fallback="/abstract-movie-poster.png"
+                      width={92}
+                      height={138}
                     />
                     <div className="flex-1 min-w-0">
                       <h4 className="font-medium text-foreground truncate">{movie.title}</h4>

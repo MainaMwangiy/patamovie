@@ -21,6 +21,7 @@ import {
   Bookmark,
 } from "lucide-react"
 import { useState } from "react"
+import { LazyImage } from "./performance/lazy-image"
 
 interface MovieDetailsProps {
   movieId: number
@@ -29,12 +30,11 @@ interface MovieDetailsProps {
 export function MovieDetails({ movieId }: MovieDetailsProps) {
   const { data: movie, loading, error } = useMovieDetails(movieId)
   const { user } = useAuth()
-  const [imageError, setImageError] = useState(false)
   const [isFavorited, setIsFavorited] = useState(false)
   const [isBookmarked, setIsBookmarked] = useState(false)
 
   if (loading) {
-    return <div>Loading...</div> // This will be replaced by Suspense fallback
+    return <div>Loading...</div>
   }
 
   if (error || !movie) {
@@ -57,20 +57,16 @@ export function MovieDetails({ movieId }: MovieDetailsProps) {
 
   const handleFavorite = () => {
     if (!user) {
-      // Show auth modal or redirect to login
       return
     }
     setIsFavorited(!isFavorited)
-    // In a real app, this would make an API call to save the favorite
   }
 
   const handleBookmark = () => {
     if (!user) {
-      // Show auth modal or redirect to login
       return
     }
     setIsBookmarked(!isBookmarked)
-    // In a real app, this would make an API call to save the bookmark
   }
 
   return (
@@ -79,13 +75,13 @@ export function MovieDetails({ movieId }: MovieDetailsProps) {
       <div className="relative">
         {/* Backdrop Image */}
         <div className="relative h-64 md:h-96 overflow-hidden rounded-lg">
-          <img
+          <LazyImage
             src={backdropUrl || "/placeholder.svg"}
             alt={movie.title}
             className="w-full h-full object-cover"
-            onError={(e) => {
-              e.currentTarget.src = "/movie-backdrop.png"
-            }}
+            fallback="/movie-backdrop.png"
+            width={1280}
+            height={720}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
@@ -103,11 +99,12 @@ export function MovieDetails({ movieId }: MovieDetailsProps) {
         <div className="lg:col-span-1">
           <div className="sticky top-8 space-y-6">
             <div className="relative aspect-[2/3] overflow-hidden rounded-lg shadow-lg">
-              <img
-                src={imageError ? "/abstract-movie-poster.png" : posterUrl}
+              <LazyImage
+                src={posterUrl}
                 alt={movie.title}
                 className="w-full h-full object-cover"
-                onError={() => setImageError(true)}
+                width={500}
+                height={750}
               />
             </div>
 
@@ -234,13 +231,13 @@ export function MovieDetails({ movieId }: MovieDetailsProps) {
                   {movie.credits.cast.slice(0, 12).map((actor) => (
                     <div key={actor.id} className="text-center">
                       <div className="relative aspect-[2/3] overflow-hidden rounded-lg mb-2">
-                        <img
+                        <LazyImage
                           src={tmdbService.getProfileURL(actor.profile_path, "w185") || "/placeholder.svg"}
                           alt={actor.name}
                           className="w-full h-full object-cover"
-                          onError={(e) => {
-                            e.currentTarget.src = "/diverse-person-profiles.png"
-                          }}
+                          fallback="/diverse-person-profiles.png"
+                          width={185}
+                          height={278}
                         />
                       </div>
                       <h4 className="font-medium text-sm text-foreground truncate">{actor.name}</h4>
