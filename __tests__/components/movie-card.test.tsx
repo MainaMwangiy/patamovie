@@ -1,13 +1,12 @@
 import { render } from "@testing-library/react";
 import { screen, fireEvent } from "@testing-library/dom";
-import { waitFor } from "@testing-library/react";
 import { MovieCard } from "@/components/movie-card";
 import type { Movie } from "@/lib/tmdb";
 import { jest } from "@jest/globals";
 
 // Mock LazyImage
 jest.mock("@/components/performance/lazy-image", () => ({
-  LazyImage: ({ src, alt, className, fallback, priority, width, height }: any) => (
+  LazyImage: ({ src, alt, className}: any) => (
     <img src={src} alt={alt} className={className} />
   ),
 }));

@@ -1,4 +1,4 @@
-import { renderHook, waitFor } from "@testing-library/react";
+import { renderHook, waitFor, act } from "@testing-library/react";
 import { usePopularMovies, useMovieSearch } from "@/hooks/use-movies";
 import { tmdbService } from "@/lib/tmdb";
 import { jest } from "@jest/globals";
@@ -96,7 +96,9 @@ describe("useMovieSearch", () => {
 
     expect(result.current.loading).toBe(false);
 
-    jest.advanceTimersByTime(300);
+    await act(async () => {
+      jest.advanceTimersByTime(300);
+    });
 
     await waitFor(() => {
       expect(result.current.loading).toBe(false);
@@ -124,7 +126,9 @@ describe("useMovieSearch", () => {
     rerender({ query: "test2" });
     rerender({ query: "test3" });
 
-    jest.advanceTimersByTime(300);
+    await act(async () => {
+      jest.advanceTimersByTime(300);
+    });
 
     await waitFor(() => {
       expect(mockTmdbService.searchMovies).toHaveBeenCalledTimes(1);
