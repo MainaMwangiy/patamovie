@@ -15,7 +15,7 @@ export function Footer() {
               <span className="font-bold text-xl text-foreground">PataMovie</span>
             </div>
             <p className="text-sm text-muted-foreground text-pretty">
-              Discover amazing movies from thousands of titles. Built with Next.js and powered by TMDB.
+              Discover amazing movies from thousands of titles. 
             </p>
           </div>
 
