@@ -57,9 +57,6 @@ export function Footer() {
           <p className="text-sm text-muted-foreground">
             {`© ${copyRightYear} PataMovie.`}
           </p>
-          <p className="text-xs text-muted-foreground">
-            This product uses the TMDB API but is not endorsed or certified by TMDB.
-          </p>
         </div>
       </div>
     </footer>
