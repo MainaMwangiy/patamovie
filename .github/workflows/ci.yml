@@ -24,8 +24,17 @@ jobs:
         node-version: ${{ env.NODE_VERSION }}
         cache: 'yarn'
 
+    # Add this step to ensure yarn.lock exists
+    - name: Verify Yarn lockfile
+      run: |
+        if [ ! -f "yarn.lock" ]; then
+          echo "❌ yarn.lock not found! Please commit your yarn.lock file."
+          exit 1
+        fi
+        echo "✅ yarn.lock found"
+
     - name: Install dependencies
-      run: yarn install --frozen-lockfile
+      run: yarn install --frozen-lockfile --prefer-offline
 
     - name: Run linting
       run: yarn lint
@@ -64,7 +73,7 @@ jobs:
         cache: 'yarn'
 
     - name: Install dependencies
-      run: yarn install --frozen-lockfile
+      run: yarn install --frozen-lockfile --prefer-offline
 
     - name: Build application
       run: yarn build
