@@ -53,8 +53,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-8 pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground">
+        <div className="mt-8 pt-8 border-t border-border flex flex-col sm:flex-row justify-center items-center gap-4">
+          <p className="text-sm text-muted-foreground text-center">
             {`© ${copyRightYear} PataMovie.`}
           </p>
         </div>
