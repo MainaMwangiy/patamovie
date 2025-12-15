@@ -16,7 +16,7 @@ export function usePopularMovies(page = 1) {
         const response = await tmdbService.getPopularMovies(page)
         setData(response)
       } catch (err) {
-        setError(err instanceof Error ? err.message : "Failed to fetch movies")
+        setError(err instanceof Error ? err.message : "Error: Failed to fetch movies")
       } finally {
         setLoading(false)
       }
