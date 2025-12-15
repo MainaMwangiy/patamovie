@@ -131,7 +131,7 @@ export function MovieDetails({ movieId }: MovieDetailsProps) {
             </div>
 
             {!user && (
-              <p className="text-sm text-muted-foreground text-center">Sign in to save favorites and bookmarks</p>
+              <p className="text-sm text-muted-foreground text-center">log in to save favorites and bookmarks</p>
             )}
 
             {/* Quick Stats */}

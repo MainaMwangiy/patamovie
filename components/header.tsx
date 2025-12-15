@@ -75,7 +75,7 @@ export function Header() {
               onClick={handleAuthClick}
               className="bg-primary text-primary-foreground hover:bg-primary/90"
             >
-              Sign In
+              log in
             </Button>
           )}
         </div>
