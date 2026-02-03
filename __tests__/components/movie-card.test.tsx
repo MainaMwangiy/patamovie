@@ -3,11 +3,18 @@ import { screen, fireEvent } from "@testing-library/dom";
 import { MovieCard } from "@/components/movie-card";
 import type { Movie } from "@/lib/tmdb";
 import { jest } from "@jest/globals";
+import Image from "next/image";
 
-// Mock LazyImage
+// Mock LazyImage - using proper typing instead of any
+interface MockLazyImageProps {
+  src: string;
+  alt: string;
+  className?: string;
+}
+
 jest.mock("@/components/performance/lazy-image", () => ({
-  LazyImage: ({ src, alt, className}: any) => (
-    <img src={src} alt={alt} className={className} />
+  LazyImage: ({ src, alt, className }: MockLazyImageProps) => (
+    <Image src={src} alt={alt} className={className} width={300} height={450} />
   ),
 }));
 
