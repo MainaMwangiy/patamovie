@@ -1,7 +1,22 @@
 import { render, screen } from "@testing-library/react";
 import { AuthProvider } from "@/app/auth/auth-provider";
+import { jest } from "@jest/globals";
 
-// Remove the UserContext mock since it doesn't exist in your codebase
+// Mock next-auth/react properly
+jest.mock("next-auth/react", () => ({
+  useSession: jest.fn(() => ({
+    data: null,
+    status: "unauthenticated",
+  })),
+}));
+
+// Type the mock for better type safety
+interface MockedNextAuth {
+  useSession: jest.MockedFunction<() => {
+    data: any;
+    status: string;
+  }>;
+}
 
 describe("AuthProvider", () => {
   beforeEach(() => {
@@ -19,8 +34,8 @@ describe("AuthProvider", () => {
   });
 
   it("handles unauthenticated session", () => {
-    // Mock unauthenticated session for this test
-    const { useSession } = require("next-auth/react");
+    // Type assertion to fix the TypeScript error
+    const { useSession } = jest.requireMock("next-auth/react") as MockedNextAuth;
     useSession.mockReturnValueOnce({
       data: null,
       status: "unauthenticated",
@@ -36,8 +51,8 @@ describe("AuthProvider", () => {
   });
 
   it("handles loading session", () => {
-    // Mock loading session
-    const { useSession } = require("next-auth/react");
+    // Type assertion to fix the TypeScript error
+    const { useSession } = jest.requireMock("next-auth/react") as MockedNextAuth;
     useSession.mockReturnValueOnce({
       data: null,
       status: "loading",
